@@ -1,0 +1,26 @@
+<div class="container w-75">
+  <div class="row justify-content-center">
+    <div class="col-5 p-0">
+      <div class="ui card shadow-none m-auto">
+        <div class="image">
+          <img style="border-radius: 12px; box-shadow: 0px 0px 20px 1px #5a5959;" class="shadow-lg" [src]="track?.album.images[0].url">
+        </div>
+        <div class="content border-0">
+          <a class="header text-center mb-1">{{ track?.name }}</a>
+          <a class="d-block text-center mb-3">
+            {{ track?.artists[0].name }}
+          </a>
+          <audio controls class="w-100" [src]="track?.audio"></audio>
+        </div>
+        <div class="extra content pl-0">
+          <button
+            (click)="goBack()" 
+            class="ui left floated basic tiny red left labeled icon button">
+            <i class="arrow alternate circle left icon"></i>
+            Go Back
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

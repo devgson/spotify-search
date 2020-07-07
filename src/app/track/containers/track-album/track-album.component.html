@@ -1,0 +1,50 @@
+<div class="container w-75">
+  <div class="row">
+    <div class="col-5 pr-0">
+      <div class="ui card shadow-none m-auto">
+        <div class="image">
+          <img style="border-radius: 12px; box-shadow: 0px 0px 20px 1px #5a5959;" class="shadow-lg" [src]="album?.images[0].url">
+        </div>
+        <div class="content border-0">
+          <p class="header text-center mb-1">{{ album?.name }}</p>
+          <p class="d-block text-center mb-0">
+            <span class="text-muted">By</span>
+             {{ album?.artists[0].name }}
+          </p>
+          <div class="ui text menu m-0">
+            <p class="item">{{ album?.tracks.length }} Song(s)</p>
+            <p class="item"><i class="mr-3">◾</i> {{totalListeningTime(album?.tracks)}} Minutes</p>
+            <p class="item"><i class="mr-3">◾</i> {{ album?.releaseDate.getFullYear() }}</p>
+          </div>
+          <div class="ui labels text-center">
+            <a *ngFor="let genre of album?.genres" class="ui basic green large label">{{ genre }}</a>
+          </div>
+        </div>
+        <div class="extra content pl-0">
+          <button
+            (click)="goBack()" 
+            class="ui left floated tiny basic red left labeled icon button">
+            <i class="arrow alternate circle left icon"></i>
+            Go Back
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-7 pl-0">
+      <div class="ui middle aligned selection list">
+        <div
+          [routerLink]="['/track', track?.id]" 
+          *ngFor="let track of album?.tracks; index as index" 
+          class="item d-flex justify-content-between align-items-center">
+          <p class="m-0">{{ index + 1 }}</p>
+          <div class="content">
+            <div class="header">{{ track.name }}</div>
+          </div>
+          <button *ngIf="track.explicit" class="ui tiny basic red button">EXPLICIT</button>
+          <button *ngIf="!track.explicit" class="ui tiny basic green button">NON-EXPLICIT</button>
+          <p>{{ convertMS(track.duration_ms).minute }}:{{ (convertMS(track.duration_ms).seconds).toString().padStart(2,0) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
